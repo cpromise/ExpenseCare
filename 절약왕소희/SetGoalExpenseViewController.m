@@ -45,7 +45,7 @@
     UIAlertController *alert = [Util shortAlert:@"변경 완료"];
     [self presentViewController:alert animated:NO completion:nil];
     
-    //비동기처리를 안주어야함. 안해주면 UX 구려짐
+    //비동기처리를 안주어야함. 안해주면 탭 이동간의 UX가 구려짐
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ALERT_DISMISS_TIME * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [alert dismissViewControllerAnimated:YES completion:nil];
         
