@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--사용내역-->
+        <scene sceneID="hNz-n2-bh7">
+            <objects>
+                <viewController storyboardIdentifier="FirstViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9pv-A4-QxB" customClass="FirstViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
+                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="W4G-HG-cDd" customClass="ExpenseScrollView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이번 달 목표금액" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeA-Z8-8hJ">
+                                <rect key="frame" x="13" y="68" width="170" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="400,000원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rK-fk-Li7">
+                                <rect key="frame" x="13" y="91" width="170" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이번 달 사용금액" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLu-M2-3bM">
+                                <rect key="frame" x="191" y="68" width="168" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="400,000원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFi-WP-niX">
+                                <rect key="frame" x="191" y="89" width="168" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="얼마썻어?" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vwg-ep-uJ4">
+                                <rect key="frame" x="16" y="237" width="320" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="원" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iN-bM-xrT">
+                                <rect key="frame" x="344" y="241" width="15" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ec-6e-fdr">
+                                <rect key="frame" x="139" y="270" width="44" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="+만">
+                                    <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addMoney:" destination="9pv-A4-QxB" eventType="touchUpInside" id="xgo-6P-CeD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fi2-cd-Wau">
+                                <rect key="frame" x="191" y="270" width="44" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="+천">
+                                    <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addMoney:" destination="9pv-A4-QxB" eventType="touchUpInside" id="8Hx-Fx-30o"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1N-an-hjZ">
+                                <rect key="frame" x="243" y="270" width="44" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="+백">
+                                    <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addMoney:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Hhe-9R-m5n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUz-gJ-4LC">
+                                <rect key="frame" x="295" y="277" width="70" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="저장하기">
+                                    <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveExpense:" destination="9pv-A4-QxB" eventType="touchUpInside" id="hvs-R8-NJ5"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="어따썻어?" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syO-eT-x81">
+                                <rect key="frame" x="16" y="198" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="400000원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAX-Um-hFE">
+                                <rect key="frame" x="16" y="138" width="245" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="사용가능" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tL8-13-XZk">
+                                <rect key="frame" x="269" y="157" width="90" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGy-oW-PZ0">
+                                <rect key="frame" x="16" y="277" width="25" height="30"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="initMoneyInput:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Zo7-df-yXF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="사용내역" id="3gT-Lb-qQ4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="availableExpense" destination="dAX-Um-hFE" id="AJU-0b-pPe"/>
+                        <outlet property="currentExpense" destination="aFi-WP-niX" id="Ez6-9y-Jp4"/>
+                        <outlet property="goalExpense" destination="7rK-fk-Li7" id="nOb-FG-JTd"/>
+                        <outlet property="lbGoalExpense" destination="7rK-fk-Li7" id="A8j-1h-1KF"/>
+                        <outlet property="scrollView" destination="W4G-HG-cDd" id="see-dK-TQ5"/>
+                        <outlet property="tfExpense" destination="vwg-ep-uJ4" id="Fhi-yF-3MW"/>
+                        <outlet property="tfExpenseObject" destination="syO-eT-x81" id="tFP-RI-jBi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1231.5" y="-356.5"/>
+        </scene>
+        <!--설정-->
+        <scene sceneID="Hm7-9i-96k">
+            <objects>
+                <tableViewController id="7Kv-N4-vhU" customClass="SecondViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5Ua-PO-FgN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection headerTitle="일반" id="VVh-fe-c8z">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="OlK-8D-Gc7" style="IBUITableViewCellStyleDefault" id="Use-7a-Ma4">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Use-7a-Ma4" id="qyI-Ud-gX5">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="목표금액 설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OlK-8D-Gc7">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="9Wr-oQ-JEY" kind="show" id="Kg1-lM-a87"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ybV-Ev-8sq" style="IBUITableViewCellStyleDefault" id="w8n-k4-oh1">
+                                        <rect key="frame" x="0.0" y="136" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w8n-k4-oh1" id="4pw-8R-rhj">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="빠루에게 용돈 요청" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybV-Ev-8sq">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="moj-c3-Cnf" kind="show" id="aFJ-Yw-rfL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="7Kv-N4-vhU" id="Iip-Qm-YX9"/>
+                            <outlet property="delegate" destination="7Kv-N4-vhU" id="abb-OK-xcy"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="설정" id="cYB-l3-bOs"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hfw-Hz-uEt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1231.5" y="381.5"/>
+        </scene>
+        <!--목표변경-->
+        <scene sceneID="n99-89-7gh">
+            <objects>
+                <viewController storyboardIdentifier="setGoalExpenseViewController" id="9Wr-oQ-JEY" customClass="SetGoalExpenseViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5qo-Sn-qZ5"/>
+                        <viewControllerLayoutGuide type="bottom" id="tkM-BG-xw8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3iY-HL-g4c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="목표 금액" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lvv-2v-eZM">
+                                <rect key="frame" x="20" y="78" width="335" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="400,000 원" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hQf-xb-qiM">
+                                <rect key="frame" x="20" y="116" width="335" height="30"/>
+                                <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="직접 입력하기" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="blk-mO-7Dx">
+                                <rect key="frame" x="42" y="319" width="290" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2d-er-SvP">
+                                <rect key="frame" x="42" y="161" width="66" height="66"/>
+                                <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="+20만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="L7g-Mz-shY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ve-cs-bBZ">
+                                <rect key="frame" x="117" y="161" width="66" height="66"/>
+                                <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="+10만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="JrE-lS-WJ4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVL-5b-b7w">
+                                <rect key="frame" x="192" y="161" width="66" height="66"/>
+                                <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="+5만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="fKK-aI-gyC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1CB-y5-uCW">
+                                <rect key="frame" x="266" y="161" width="66" height="66"/>
+                                <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="+1만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="bXE-lH-9Qk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="-20" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcH-l0-TNB">
+                                <rect key="frame" x="42" y="235" width="66" height="66"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="-20만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="936-as-hAy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="-10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5N4-EY-Zwi">
+                                <rect key="frame" x="117" y="235" width="66" height="66"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="-10만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="jnC-f0-gY0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="-5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RW-gS-9B1">
+                                <rect key="frame" x="192" y="235" width="66" height="66"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="-5만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="sls-QU-84m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="-1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ozC-07-6Q0">
+                                <rect key="frame" x="266" y="235" width="66" height="66"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="-1만">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="hQn-Ks-RVB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhh-tJ-vEq">
+                                <rect key="frame" x="250" y="357" width="82" height="30"/>
+                                <state key="normal" title="목표금액 저장"/>
+                                <connections>
+                                    <action selector="btnSetGoalExpense:" destination="9Wr-oQ-JEY" eventType="touchUpInside" id="ot2-Yu-UpG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="목표변경" id="qQ4-8G-cLm"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="lbGoalExpense" destination="hQf-xb-qiM" id="hDR-eS-OSP"/>
+                        <outlet property="tfGoalExpense" destination="blk-mO-7Dx" id="2kd-yq-WuG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bIK-cc-eBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1695.5" y="381.5"/>
+        </scene>
+        <!--빠루찬스-->
+        <scene sceneID="6Tq-ks-sYu">
+            <objects>
+                <viewController id="moj-c3-Cnf" customClass="JokeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FhQ-Ju-3Ao"/>
+                        <viewControllerLayoutGuide type="bottom" id="gzu-Ag-ubM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sbI-np-k7M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="어떤 찬스를 사용하시겠어요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUu-4N-EoV">
+                                <rect key="frame" x="20" y="72" width="335" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MR-s4-9Cw">
+                                <rect key="frame" x="20" y="160" width="335" height="47"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="그냥 받기 찬스">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTouchedChance:" destination="moj-c3-Cnf" eventType="touchUpInside" id="DPA-qT-9nd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2y-BA-8JT">
+                                <rect key="frame" x="20" y="215" width="335" height="47"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="빠루카드 찬스">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTouchedChance:" destination="moj-c3-Cnf" eventType="touchUpInside" id="jHC-fd-jcq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vf0-Be-TF3">
+                                <rect key="frame" x="20" y="270" width="335" height="47"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="자동이체 찬스">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTouchedChance:" destination="moj-c3-Cnf" eventType="touchUpInside" id="18H-6q-QSA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXl-3f-qyJ">
+                                <rect key="frame" x="20" y="105" width="335" height="47"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="빌리기 찬스">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTouchedChance:" destination="moj-c3-Cnf" eventType="touchUpInside" id="Zbc-bg-Aa8"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="balance_hana.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="g0R-rt-NbT">
+                                <rect key="frame" x="76" y="402" width="223" height="96"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="balance_kb.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qOe-tp-6VW">
+                                <rect key="frame" x="10" y="491" width="186" height="70"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="balance_sh.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="c0Y-Ub-Oc9">
+                                <rect key="frame" x="146" y="519" width="206" height="70"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="찬스 사용시 참고하세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOK-NF-3ic">
+                                <rect key="frame" x="95" y="358" width="185" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="빠루찬스" id="Akb-X9-Ytg"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="542-go-hAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1695.5" y="1196.5"/>
+        </scene>
+        <!--Expense Tab Bar Controller-->
+        <scene sceneID="yl2-sM-qoP">
+            <objects>
+                <tabBarController id="49e-Tb-3d3" customClass="ExpenseTabBarController" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="cJ0-9f-fmi" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="gSO-Cn-YIg" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fK4-nN-Jnx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cJ0-9f-fmi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="acW-dT-cKf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9aM-HN-k3S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="vfL-5q-SBW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vaB-dC-mBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.5" y="-356.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PEt-sM-9a5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gSO-Cn-YIg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="more" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="arm-3Q-S2i">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7Kv-N4-vhU" kind="relationship" relationship="rootViewController" id="8KX-q0-KPQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lYS-ch-N0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.5" y="381.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="balance_hana.jpg" width="750" height="330"/>
+        <image name="balance_kb.jpg" width="750" height="296"/>
+        <image name="balance_sh.jpg" width="740" height="248"/>
+    </resources>
+</document>
