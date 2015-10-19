@@ -67,6 +67,7 @@
     
     addedVal += [Util removeComma:_tfGoalExpense.text];
     _tfGoalExpense.text = [Util commaFormat:addedVal];
+    _lbGoalExpense.text = [Util commaFormat:addedVal];
 }
 
 #pragma 델리게이트 및 유틸

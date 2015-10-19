@@ -10,7 +10,7 @@
 #import "ExpenseTableView.h"
 #import "ExpenseTableViewCell.h"
 #import "Util.h"
-
+#import "UIColor+EC.h"
 
 
 @interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate, UITabBarDelegate, UITabBarControllerDelegate> {
@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self didChangeMonth];
     curInputExpense = 0;
     _expenseList = [[NSMutableArray alloc] init];
     
@@ -37,6 +38,8 @@
     //지출 히스토리 델리게이트 설정
     _expenseTableView = [[ExpenseTableView alloc] initWithFrame:CGRectMake(0, TABLE_START_POINT, 375, 0) style:UITableViewStylePlain];
     _expenseTableView.rowHeight = 70.0f;
+//    _expenseTableView.backgroundColor = [UIColor colorWithHexString:@"FDBD33"];
+//    _expenseTableView.separatorColor = [UIColor whiteColor];
     self.expenseTableView.delegate = self;
     self.expenseTableView.dataSource = self;
     _scrollView.delegate = self;
@@ -252,7 +255,22 @@
     cell.lbExpenseAmount.text = [Util commaFormat:expenseAmount.integerValue];
     cell.lbExpenseDate.text = expenseDate;
     cell.lbExpenseObject.text = expenseObject;
+//    cell.backgroundColor = [UIColor colorWithHexString:@"FDBD33"];
     return cell;
+}
+
+- (BOOL)didChangeMonth{
+    BOOL changed = NO;
+    
+    NSDateFormatter *date = [[NSDateFormatter alloc] init];
+    [date setDateFormat:@"MM"];
+    NSString *thisMonth = [date stringFromDate:[NSDate date]];
+    
+    
+    
+    return changed;
+
+    
 }
 
 
