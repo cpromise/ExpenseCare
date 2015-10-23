@@ -28,7 +28,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma 문자메시지 전송
+#pragma mark - 문자메시지 전송
 - (void)sendMessageWithVal:(NSString *)money{
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
     if([MFMessageComposeViewController canSendText])
@@ -58,7 +58,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma 이벤트(Joke) 버튼 터치 이벤트
+#pragma mark - 이벤트(Joke) 버튼 터치 이벤트
 -(IBAction)onTouchedChance:(id)sender{
     UIButton *btn = (UIButton *)sender;
     NSInteger tag = btn.tag;
@@ -118,7 +118,7 @@
     
 }
 
-#pragma 델리게이트 및 유틸
+#pragma mark - 델리게이트 및 유틸
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //    if( [_tfRequestMoney isFirstResponder] ){

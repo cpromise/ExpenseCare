@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SecondViewController : UITableViewController
+- (IBAction)onTouchedMonthlyAlertAgree:(id)sender;
 
 @end

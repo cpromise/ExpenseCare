@@ -8,6 +8,7 @@
 
 #import "SetGoalExpenseViewController.h"
 #import "Util.h"
+#import "UIAlertController+ExpenseAlertController.h"
 #define ALERT_DISMISS_TIME 1.5
 
 @interface SetGoalExpenseViewController ()
@@ -33,7 +34,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma 목표 값 저장하기 버튼 터치 이벤트
+#pragma mark - 목표 값 저장하기 버튼 터치 이벤트
 - (IBAction)btnSetGoalExpense:(id)sender {
     NSNumber *goalExpenseToSave = [NSNumber numberWithInteger:[Util removeComma:_tfGoalExpense.text]];
     [Util setLocalData:goalExpenseToSave forKey:GOAL_EXPENSE];
@@ -42,7 +43,7 @@
     [self.tabBarController.delegate tabBarController:self.tabBarController didSelectViewController:[self.tabBarController.viewControllers objectAtIndex:0]];
 
 
-    UIAlertController *alert = [Util shortAlert:@"변경 완료"];
+    UIAlertController *alert = [UIAlertController shortAlert:@"변경 완료" withMessage:@"변경을 완료했습니다."];
     [self presentViewController:alert animated:NO completion:nil];
     
     //비동기처리를 안주어야함. 안해주면 탭 이동간의 UX가 구려짐
@@ -60,7 +61,7 @@
     });
 }
 
-#pragma 편리한 금액변경 왕버튼 터치 이벤트
+#pragma mark - 편리한 금액변경 왕버튼 터치 이벤트
 - (IBAction)addSetGoalExpense:(id)sender{
     UIButton *btn = (UIButton *)sender;
     NSInteger addedVal = btn.tag * 10000;
@@ -70,7 +71,7 @@
     _lbGoalExpense.text = [Util commaFormat:addedVal];
 }
 
-#pragma 델리게이트 및 유틸
+#pragma mark - 델리게이트 및 유틸
 - (void)didChangedInputExpense:(UITextField *)textfield {
     NSInteger val = [Util removeComma:textfield.text];
     textfield.text = [Util commaFormat:val];

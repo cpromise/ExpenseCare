@@ -29,14 +29,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 
 /*
@@ -84,7 +84,7 @@
 */
 
 /*
-#pragma mark - Navigation
+#pragma mark - mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -93,4 +93,12 @@
 }
 */
 
+- (IBAction)onTouchedMonthlyAlertAgree:(id)sender {
+    UISwitch *swMonthlyAlertAgree = (UISwitch *)sender;
+    if ([swMonthlyAlertAgree isOn]) {
+        NSLog(@"ON");
+    } else{
+        NSLog(@"OFF");
+    }
+}
 @end

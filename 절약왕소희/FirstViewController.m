@@ -7,11 +7,14 @@
 //
 
 #import "FirstViewController.h"
+#import "SetGoalExpenseViewController.h"
 #import "ExpenseTableView.h"
 #import "ExpenseTableViewCell.h"
 #import "Util.h"
 #import "UIColor+EC.h"
+#import "UIAlertController+ExpenseAlertController.h"
 
+#define DATE_FORM @"yy-MM-dd hh-mm"
 
 @interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate, UITabBarDelegate, UITabBarControllerDelegate> {
     NSString *dataFilePath;
@@ -28,7 +31,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self didChangeMonth];
     curInputExpense = 0;
     _expenseList = [[NSMutableArray alloc] init];
     
@@ -53,6 +55,8 @@
     NSLog(@"contentSizeHeight : %f",_scrollView.contentSize.height);
 
     [self refreshExpenseData];
+    [self didChangeMonth];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,7 +64,7 @@
 }
 
 
-#pragma 버튼터치 이벤트
+#pragma mark - 버튼터치 이벤트
 // +만,천,백 버튼
 - (IBAction)addMoney:(id)sender{
     UIButton *button = (UIButton *)sender;
@@ -92,7 +96,7 @@
 - (IBAction)saveExpense:(id)sender {
     if (_tfExpense == nil || [_tfExpense.text isEqualToString:@""] || [_tfExpenseObject.text isEqualToString:@"0"] || _tfExpense.text.length == 0) {
         if (_tfExpenseObject == nil || [_tfExpenseObject.text isEqualToString:@""] || _tfExpenseObject.text.length == 0) {
-            UIAlertController *alert = [Util shortAlert:@"사용금액 또는 사용목적 중 \n적어도 한 개는 입력해야 합니다."];
+            UIAlertController *alert = [UIAlertController shortAlert:@"이런이런" withMessage:@"사용금액 또는 사용목적 중 \n적어도 한 개는 입력해야 합니다."];
             UIAlertAction *action = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
                 [_tfExpenseObject becomeFirstResponder];
                 [alert dismissViewControllerAnimated:YES completion:nil];
@@ -108,7 +112,7 @@
     if (!_expenseList) {
         _expenseList = [[NSMutableArray alloc] init];
     }
-    [_expenseList addObject:self.getExpenseData];
+    [_expenseList addObject:[self getExpenseData]];
 //    [NSKeyedArchiver archiveRootObject:_expenseList toFile:dataFilePath];
     [Util setLocalData:_expenseList forKey:EXPENSE_HISTORY];
     [self refreshExpenseData];
@@ -123,13 +127,13 @@
     _tfExpense.text = @"";
 }
 
-#pragma 지출 값 텍스트필드의 문자열을 숫자로 변환
+#pragma mark - 지출 값 텍스트필드의 문자열을 숫자로 변환
 - (NSUInteger)checkCurInputExpense{
     NSUInteger rst = [_tfExpense.text integerValue];
     return rst;
 }
 
-#pragma 데이터 아카이빙 관련
+#pragma mark - 데이터 아카이빙 관련
 - (NSDictionary *)getExpenseData{
     NSDictionary *expenseData = [[NSDictionary alloc] initWithObjectsAndKeys:_tfExpenseObject.text,@"EXPENSE_OBJECT",self.getExpenseDate,@"EXPENSE_DATE",[NSString stringWithFormat:@"%li",(long)[Util removeComma:_tfExpense.text]],@"EXPENSE_AMOUNT", nil];
     return expenseData;
@@ -138,47 +142,73 @@
 //현재 시간 리턴
 - (NSString *)getExpenseDate{
     NSDateFormatter *date = [[NSDateFormatter alloc] init];
-    [date setDateFormat:@"yy-MM-dd hh-mm"];
+    [date setDateFormat:DATE_FORM];
     NSString *expenseDate = [date stringFromDate:[NSDate date]];
     
     return expenseDate;
 }
 
-#pragma 데이터 셋팅 (핵심메소드)
+#pragma mark - mark 데이터 셋팅 (핵심메소드)
 - (void)refreshExpenseData{
     float tableViewHeight = 0;
     NSInteger totalExpenseAmount = 0;
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     
+    //아카이빙을 통해서 저장된 지출 데이터 가져옴
     dataFilePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"data.archive"]];
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if( [fileManager fileExistsAtPath:dataFilePath])
     {
         _expenseList = [[Util getLocalData] objectForKey:EXPENSE_HISTORY];
     }
     
+    //총 사용 금액 계산
     for (NSInteger idx = 0; idx<_expenseList.count; idx++) {
         totalExpenseAmount += [[[_expenseList objectAtIndex:idx] objectForKey:@"EXPENSE_AMOUNT"] intValue];
     }
 
+    //총 사용금액, 사용가능 금액 변경
     [self refreshGoalExpense];
     _currentExpense.text = [NSString stringWithFormat:@"%@원",[Util commaFormat:totalExpenseAmount]];
     _availableExpense.text = [NSString stringWithFormat:@"%@원", totalExpenseAmount<=goalExpense.integerValue ?[Util commaFormat:goalExpense.integerValue-totalExpenseAmount]:@"0"];
 
+    //테이블뷰 최소사이즈를 스크롤뷰보다 작지 않게 설정
     tableViewHeight = _expenseList.count*_expenseTableView.rowHeight;
     if (tableViewHeight < _scrollView.frame.size.height) {
         tableViewHeight = _scrollView.frame.size.height;
     }
     
+    //테이블뷰에 데이터 삽입
     [_expenseTableView reloadData];
     _scrollView.contentSize = CGSizeMake(_expenseTableView.frame.size.width, tableViewHeight + TABLE_START_POINT);
     [_scrollView setValidRect:CGRectMake(0,TABLE_START_POINT, 375, _expenseTableView.frame.size.height)];
+    
+    //달이 바뀌었을 경우
+    if ([self didChangeMonth]) {
+
+        UIAlertController *alertMonthChanged = [UIAlertController shortAlert:@"벌써 한 달" withMessage:@"달이 변경되어 새로운 데이터가 로딩됩니다. 목표금액을 변경하시겠습니까?"];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"확인"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction *action){
+                                                       [alertMonthChanged dismissViewControllerAnimated:YES completion:nil];
+                                                       SetGoalExpenseViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"setGoalExpenseViewController"];
+                                                       [self.navigationController pushViewController:controller animated:YES];
+                                                   }];
+        
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"취소"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action){
+                                                           [alertMonthChanged dismissViewControllerAnimated:YES completion:nil];
+                                                       }];
+        [alertMonthChanged addAction:ok];
+        [alertMonthChanged addAction:cancel];
+        [self presentViewController:alertMonthChanged animated:YES completion:nil];
+    }
 }
 
 
-#pragma 목표금액 재설정
+#pragma mark - 목표금액 재설정
 - (void)refreshGoalExpense{
     // 목표금액 관련
     // 디폴트 목표금액은 40만원
@@ -191,7 +221,7 @@
     _lbGoalExpense.text = [NSString stringWithFormat:@"%@원",[Util commaFormat:goalExpense.integerValue]];
 }
 
-#pragma 델리게이트
+#pragma mark - - 델리게이트
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     UINavigationController *vc = (UINavigationController *)viewController;
     UIViewController *vc2 = [vc.viewControllers objectAtIndex:0];
@@ -238,7 +268,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellName = @"expenseCell";
-    NSMutableDictionary *cellData = [_expenseList objectAtIndex:indexPath.row];
+
+    NSMutableDictionary *cellData = [_expenseList objectAtIndex:_expenseList.count - indexPath.row - 1];
     ExpenseTableViewCell *cell = [_expenseTableView dequeueReusableCellWithIdentifier:cellName];
     
     if ( !cell ) {
@@ -262,17 +293,22 @@
 - (BOOL)didChangeMonth{
     BOOL changed = NO;
     
-    NSDateFormatter *date = [[NSDateFormatter alloc] init];
-    [date setDateFormat:@"MM"];
-    NSString *thisMonth = [date stringFromDate:[NSDate date]];
-    
-    
-    
+    if (_expenseList && _expenseList.count > 0) {
+        NSString *strLatestDate = [[_expenseList objectAtIndex:_expenseList.count-1] objectForKey:@"EXPENSE_DATE"];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:DATE_FORM];
+        NSDate *latestDate = [dateFormatter dateFromString:strLatestDate];
+        
+        [dateFormatter setDateFormat:@"MM"];
+        NSUInteger latestMonth = [dateFormatter stringFromDate:latestDate].integerValue;
+        NSUInteger thisMonth = [dateFormatter stringFromDate:[NSDate date]].integerValue;
+        
+        if (thisMonth != latestMonth) {
+            changed = YES;
+        }
+    }
     return changed;
-
-    
 }
-
 
 @end
 
