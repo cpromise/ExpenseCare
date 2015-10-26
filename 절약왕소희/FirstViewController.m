@@ -38,20 +38,34 @@
     [_tfExpense addTarget:self action:@selector(didChangedInputExpense:) forControlEvents:UIControlEventEditingChanged];
 
     //지출 히스토리 델리게이트 설정
-    _expenseTableView = [[ExpenseTableView alloc] initWithFrame:CGRectMake(0, TABLE_START_POINT, 375, 0) style:UITableViewStylePlain];
+    _expenseTableView = [[ExpenseTableView alloc] initWithFrame:CGRectMake(0, TABLE_START_POINT, self.view.frame.size.width, 0) style:UITableViewStylePlain];
+    [_scrollView addSubview:_expenseTableView];
+    NSLog(@"Width of ScrollVIew : %f",_scrollView.frame.size.width);
+    NSLog(@"Height of ScrollVIew : %f",_scrollView.frame.size.height);
+//    _expenseTableView.translatesAutoresizingMaskIntoConstraints = NO;
+//
+//    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@""
+//                                                                        options:0
+//                                                                        metrics:nil
+//                                                                          views:NSDictionaryOfVariableBindings(_scrollView,_expenseTableView)]];
+//    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:"
+//                                                                        options:0
+//                                                                        metrics:nil
+//                                                                          views:NSDictionaryOfVariableBindings(_scrollView,_expenseTableView)]];
+
     _expenseTableView.rowHeight = 70.0f;
-//    _expenseTableView.backgroundColor = [UIColor colorWithHexString:@"FDBD33"];
-//    _expenseTableView.separatorColor = [UIColor whiteColor];
     self.expenseTableView.delegate = self;
     self.expenseTableView.dataSource = self;
     _scrollView.delegate = self;
+//    _scrollView.layer.borderColor = [UIColor redColor].CGColor;
+//    _scrollView.layer.borderWidth = 3.0f;
     self.tabBarController.delegate = self;
     
     [self.view bringSubviewToFront:_scrollView];
     _expenseTableView.scrollEnabled = NO;
 //    _scrollView.contentSize = CGSizeMake(_expenseTableView.frame.size.width,_expenseTableView.frame.origin.y + _expenseTableView.frame.size.height);
 
-    [_scrollView addSubview:_expenseTableView];
+
     NSLog(@"contentSizeHeight : %f",_scrollView.contentSize.height);
 
     [self refreshExpenseData];
@@ -181,8 +195,18 @@
     
     //테이블뷰에 데이터 삽입
     [_expenseTableView reloadData];
+    float viewHeight = _expenseTableView.rowHeight*[_expenseTableView numberOfRowsInSection:0];
+    
+    if (viewHeight < _scrollView.frame.size.height) {
+        viewHeight = _scrollView.frame.size.height;
+    }
+    _expenseTableView.layer.borderColor = [UIColor blueColor].CGColor;
+    _expenseTableView.layer.borderWidth = 3.0f;
+    _expenseTableView.frame = CGRectMake(_expenseTableView.frame.origin.x, _expenseTableView.frame.origin.y, _expenseTableView.frame.size.width, viewHeight);
+
+    
     _scrollView.contentSize = CGSizeMake(_expenseTableView.frame.size.width, tableViewHeight + TABLE_START_POINT);
-    [_scrollView setValidRect:CGRectMake(0,TABLE_START_POINT, 375, _expenseTableView.frame.size.height)];
+    [_scrollView setValidRect:CGRectMake(0,TABLE_START_POINT, _expenseTableView.frame.size.width, _expenseTableView.frame.size.height)];
     
     //달이 바뀌었을 경우
     if ([self didChangeMonth]) {
@@ -255,7 +279,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
-        [_expenseList removeObjectAtIndex:[indexPath row]];
+        [_expenseList removeObjectAtIndex:(_expenseList.count - indexPath.row - 1)];
         //        [NSKeyedArchiver archiveRootObject:_expenseList toFile:dataFilePath];
         [Util setLocalData:_expenseList forKey:EXPENSE_HISTORY];
         [self refreshExpenseData];

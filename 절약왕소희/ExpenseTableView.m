@@ -27,14 +27,6 @@
 //reload될 때, 테이블뷰의 높이만 바꿔줍니다.
 -(void)reloadData{
     [super reloadData];
-    float viewHeight = self.rowHeight*[self numberOfRowsInSection:0];
-    
-    if (viewHeight < self.superview.frame.size.height) {
-        viewHeight = self.superview.frame.size.height;
-    }
-
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, viewHeight);
-    
 }
 
 @end
