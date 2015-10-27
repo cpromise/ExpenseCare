@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2054CEC1BDA5FB000C0C600 /* UIAlertController+ExpenseAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2054CEB1BDA5FB000C0C600 /* UIAlertController+ExpenseAlertController.m */; settings = {ASSET_TAGS = (); }; };
 		F251B0841B9DE07A00D77D09 /* ExpenseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F251B0821B9DE07A00D77D09 /* ExpenseTableViewCell.m */; };
 		F251B0851B9DE07A00D77D09 /* ExpenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F251B0831B9DE07A00D77D09 /* ExpenseTableViewCell.xib */; };
 		F282321D1BBC1B6E007C2878 /* ExpenseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F282321C1BBC1B6E007C2878 /* ExpenseTableView.m */; settings = {ASSET_TAGS = (); }; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F2054CEA1BDA5FB000C0C600 /* UIAlertController+ExpenseAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+ExpenseAlertController.h"; sourceTree = "<group>"; };
+		F2054CEB1BDA5FB000C0C600 /* UIAlertController+ExpenseAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+ExpenseAlertController.m"; sourceTree = "<group>"; };
 		F251B0811B9DE07A00D77D09 /* ExpenseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseTableViewCell.h; sourceTree = "<group>"; };
 		F251B0821B9DE07A00D77D09 /* ExpenseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseTableViewCell.m; sourceTree = "<group>"; };
 		F251B0831B9DE07A00D77D09 /* ExpenseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpenseTableViewCell.xib; sourceTree = "<group>"; };
@@ -94,6 +97,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F2054CED1BDA601200C0C600 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				F2054CEA1BDA5FB000C0C600 /* UIAlertController+ExpenseAlertController.h */,
+				F2054CEB1BDA5FB000C0C600 /* UIAlertController+ExpenseAlertController.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		F2054CEE1BDA605700C0C600 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F2B347E31B91E82C000DCE6E /* FirstViewController.h */,
+				F2B347E41B91E82C000DCE6E /* FirstViewController.m */,
+				F2EE23B91BBAAECD00D4260E /* SecondViewController.h */,
+				F2EE23BA1BBAAECD00D4260E /* SecondViewController.m */,
+				F2EE23C21BBAB68300D4260E /* SetGoalExpenseViewController.h */,
+				F2EE23C31BBAB68300D4260E /* SetGoalExpenseViewController.m */,
+				F2EE23C51BBABACC00D4260E /* JokeViewController.h */,
+				F2EE23C61BBABACC00D4260E /* JokeViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		F2B347D01B91E82C000DCE6E = {
 			isa = PBXGroup;
 			children = (
@@ -115,12 +142,10 @@
 		F2B347DB1B91E82C000DCE6E /* 절약왕소희 */ = {
 			isa = PBXGroup;
 			children = (
+				F2054CEE1BDA605700C0C600 /* Controllers */,
+				F2054CED1BDA601200C0C600 /* Category */,
 				F2B347E01B91E82C000DCE6E /* AppDelegate.h */,
 				F2B347E11B91E82C000DCE6E /* AppDelegate.m */,
-				F2B347E31B91E82C000DCE6E /* FirstViewController.h */,
-				F2B347E41B91E82C000DCE6E /* FirstViewController.m */,
-				F2EE23B91BBAAECD00D4260E /* SecondViewController.h */,
-				F2EE23BA1BBAAECD00D4260E /* SecondViewController.m */,
 				F2B347E91B91E82C000DCE6E /* Main.storyboard */,
 				F2B347EC1B91E82C000DCE6E /* Images.xcassets */,
 				F2B347EE1B91E82C000DCE6E /* LaunchScreen.xib */,
@@ -132,10 +157,6 @@
 				F251B0831B9DE07A00D77D09 /* ExpenseTableViewCell.xib */,
 				F2EE23B01BB983A600D4260E /* Util.h */,
 				F2EE23B11BB983A600D4260E /* Util.m */,
-				F2EE23C21BBAB68300D4260E /* SetGoalExpenseViewController.h */,
-				F2EE23C31BBAB68300D4260E /* SetGoalExpenseViewController.m */,
-				F2EE23C51BBABACC00D4260E /* JokeViewController.h */,
-				F2EE23C61BBABACC00D4260E /* JokeViewController.m */,
 				F282321B1BBC1B6E007C2878 /* ExpenseTableView.h */,
 				F282321C1BBC1B6E007C2878 /* ExpenseTableView.m */,
 				F282321E1BBC2952007C2878 /* ExpenseScrollView.h */,
@@ -294,6 +315,7 @@
 				F2EE23C41BBAB68300D4260E /* SetGoalExpenseViewController.m in Sources */,
 				F251B0841B9DE07A00D77D09 /* ExpenseTableViewCell.m in Sources */,
 				F2B347E21B91E82C000DCE6E /* AppDelegate.m in Sources */,
+				F2054CEC1BDA5FB000C0C600 /* UIAlertController+ExpenseAlertController.m in Sources */,
 				F2B347E51B91E82C000DCE6E /* FirstViewController.m in Sources */,
 				F2EE23BB1BBAAECD00D4260E /* SecondViewController.m in Sources */,
 				F2EE23B21BB983A600D4260E /* Util.m in Sources */,

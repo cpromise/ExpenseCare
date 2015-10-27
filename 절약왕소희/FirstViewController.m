@@ -42,35 +42,17 @@
     [_scrollView addSubview:_expenseTableView];
     NSLog(@"Width of ScrollVIew : %f",_scrollView.frame.size.width);
     NSLog(@"Height of ScrollVIew : %f",_scrollView.frame.size.height);
-//    _expenseTableView.translatesAutoresizingMaskIntoConstraints = NO;
-//
-//    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@""
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:NSDictionaryOfVariableBindings(_scrollView,_expenseTableView)]];
-//    [_scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:"
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:NSDictionaryOfVariableBindings(_scrollView,_expenseTableView)]];
 
     _expenseTableView.rowHeight = 70.0f;
     self.expenseTableView.delegate = self;
     self.expenseTableView.dataSource = self;
     _scrollView.delegate = self;
-//    _scrollView.layer.borderColor = [UIColor redColor].CGColor;
-//    _scrollView.layer.borderWidth = 3.0f;
     self.tabBarController.delegate = self;
     
     [self.view bringSubviewToFront:_scrollView];
     _expenseTableView.scrollEnabled = NO;
-//    _scrollView.contentSize = CGSizeMake(_expenseTableView.frame.size.width,_expenseTableView.frame.origin.y + _expenseTableView.frame.size.height);
-
-
-    NSLog(@"contentSizeHeight : %f",_scrollView.contentSize.height);
 
     [self refreshExpenseData];
-    [self didChangeMonth];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,45 +146,39 @@
 
 #pragma mark - mark 데이터 셋팅 (핵심메소드)
 - (void)refreshExpenseData{
-    float tableViewHeight = 0;
     NSInteger totalExpenseAmount = 0;
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsDir = [dirPaths objectAtIndex:0];
     
     //아카이빙을 통해서 저장된 지출 데이터 가져옴
-    dataFilePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"data.archive"]];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if( [fileManager fileExistsAtPath:dataFilePath])
-    {
+    if ([[Util getLocalData] objectForKey:EXPENSE_HISTORY]) {
         _expenseList = [[Util getLocalData] objectForKey:EXPENSE_HISTORY];
+        
+        //총 사용 금액 계산
+        for (NSInteger idx = 0; idx<_expenseList.count; idx++) {
+            totalExpenseAmount += [[[_expenseList objectAtIndex:idx] objectForKey:@"EXPENSE_AMOUNT"] intValue];
+        }
     }
     
-    //총 사용 금액 계산
-    for (NSInteger idx = 0; idx<_expenseList.count; idx++) {
-        totalExpenseAmount += [[[_expenseList objectAtIndex:idx] objectForKey:@"EXPENSE_AMOUNT"] intValue];
-    }
-
     //총 사용금액, 사용가능 금액 변경
     [self refreshGoalExpense];
     _currentExpense.text = [NSString stringWithFormat:@"%@원",[Util commaFormat:totalExpenseAmount]];
     _availableExpense.text = [NSString stringWithFormat:@"%@원", totalExpenseAmount<=goalExpense.integerValue ?[Util commaFormat:goalExpense.integerValue-totalExpenseAmount]:@"0"];
 
-    //테이블뷰 최소사이즈를 스크롤뷰보다 작지 않게 설정
-    tableViewHeight = _expenseList.count*_expenseTableView.rowHeight;
-    if (tableViewHeight < _scrollView.frame.size.height) {
-        tableViewHeight = _scrollView.frame.size.height;
-    }
+
     
     //테이블뷰에 데이터 삽입
     [_expenseTableView reloadData];
-    float viewHeight = _expenseTableView.rowHeight*[_expenseTableView numberOfRowsInSection:0];
-    
-    if (viewHeight < _scrollView.frame.size.height) {
-        viewHeight = _scrollView.frame.size.height;
+    float tableViewHeight = _expenseTableView.rowHeight*[_expenseTableView numberOfRowsInSection:0];
+
+    //테이블뷰 최소사이즈를 스크롤뷰보다 작지 않게 설정
+    if (tableViewHeight < _scrollView.frame.size.height) {
+        float statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        float tabBarHeight = self.tabBarController.tabBar.frame.size.height;
+        float naviBarHeight = self.navigationController.navigationBar.frame.size.height;
+        tableViewHeight = self.view.frame.size.height - statusBarHeight - naviBarHeight - tabBarHeight;
+        
     }
-    _expenseTableView.layer.borderColor = [UIColor blueColor].CGColor;
-    _expenseTableView.layer.borderWidth = 3.0f;
-    _expenseTableView.frame = CGRectMake(_expenseTableView.frame.origin.x, _expenseTableView.frame.origin.y, _expenseTableView.frame.size.width, viewHeight);
+
+    _expenseTableView.frame = CGRectMake(_expenseTableView.frame.origin.x, _expenseTableView.frame.origin.y, _expenseTableView.frame.size.width, tableViewHeight);
 
     
     _scrollView.contentSize = CGSizeMake(_expenseTableView.frame.size.width, tableViewHeight + TABLE_START_POINT);
@@ -236,12 +212,13 @@
 - (void)refreshGoalExpense{
     // 목표금액 관련
     // 디폴트 목표금액은 40만원
-    goalExpense = [[Util getLocalData] objectForKey:GOAL_EXPENSE];
-    if (!goalExpense) {
-        [Util setLocalData:[NSNumber numberWithInteger:DEFAULT_GOAL_EXPENSE] forKey:GOAL_EXPENSE];
+    if ([[Util getLocalData] objectForKey:GOAL_EXPENSE]) {
+        goalExpense = [[Util getLocalData] objectForKey:GOAL_EXPENSE];
+    } else{
         goalExpense = [NSNumber numberWithInteger:DEFAULT_GOAL_EXPENSE];
+        [Util setLocalData:goalExpense forKey:GOAL_EXPENSE];
     }
-    
+
     _lbGoalExpense.text = [NSString stringWithFormat:@"%@원",[Util commaFormat:goalExpense.integerValue]];
 }
 

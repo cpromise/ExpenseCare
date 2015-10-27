@@ -67,6 +67,9 @@
     NSInteger addedVal = btn.tag * 10000;
     
     addedVal += [Util removeComma:_tfGoalExpense.text];
+    if (addedVal < 0) {
+        addedVal = 0;
+    }
     _tfGoalExpense.text = [Util commaFormat:addedVal];
     _lbGoalExpense.text = [Util commaFormat:addedVal];
 }

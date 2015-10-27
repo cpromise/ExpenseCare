@@ -9,13 +9,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x110c;&#x1165;&#x11af;&#x110b;&#x1163;&#x11a8;&#x110b;&#x116a;&#x11bc;&#x1109;&#x1169;&#x1112;&#x1174;/FirstViewController.m"
-            timestampString = "466784773.384182"
+            filePath = "&#x110c;&#x1165;&#x11af;&#x110b;&#x1163;&#x11a8;&#x110b;&#x116a;&#x11bc;&#x1109;&#x1169;&#x1112;&#x1174;/UIAlertController+ExpenseAlertController.m"
+            timestampString = "467298140.93292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "-tabBarController:didSelectViewController:"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "+shortAlert:withMessage:withOKButtonTitle:withAction:withCancelButtonTitle:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x110c;&#x1165;&#x11af;&#x110b;&#x1163;&#x11a8;&#x110b;&#x116a;&#x11bc;&#x1109;&#x1169;&#x1112;&#x1174;/FirstViewController.m"
+            timestampString = "467648623.956129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "-refreshExpenseData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x110c;&#x1165;&#x11af;&#x110b;&#x1163;&#x11a8;&#x110b;&#x116a;&#x11bc;&#x1109;&#x1169;&#x1112;&#x1174;/FirstViewController.m"
+            timestampString = "467648623.956129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-refreshExpenseData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
