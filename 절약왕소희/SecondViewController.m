@@ -7,21 +7,26 @@
 //
 
 #import "SecondViewController.h"
+#import "Util.h"
 
 @interface SecondViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation SecondViewController{
+    BOOL useMonthlyAlarm;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if ([[Util getLocalData] objectForKey:MONTHLY_ALARM_YN]) {
+        useMonthlyAlarm = [[[Util getLocalData] objectForKey:MONTHLY_ALARM_YN] boolValue];
+    } else{
+        useMonthlyAlarm = NO;
+        [Util setLocalData:@NO forKey:MONTHLY_ALARM_YN];
+    }
+    [_switchMonthlyAlarm setOn:useMonthlyAlarm];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,10 +100,11 @@
 
 - (IBAction)onTouchedMonthlyAlertAgree:(id)sender {
     UISwitch *swMonthlyAlertAgree = (UISwitch *)sender;
+
     if ([swMonthlyAlertAgree isOn]) {
-        NSLog(@"ON");
+        [Util setLocalData:@YES forKey:MONTHLY_ALARM_YN];
     } else{
-        NSLog(@"OFF");
+        [Util setLocalData:@NO forKey:MONTHLY_ALARM_YN];
     }
 }
 @end

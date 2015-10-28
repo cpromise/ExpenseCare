@@ -27,6 +27,8 @@
     NSUInteger curInputExpense;
     NSUInteger goalExpenseVal;
     NSNumber *goalExpense;
+    
+    BOOL useMonthlyAlarm;
 }
 
 - (void)viewDidLoad {
@@ -51,6 +53,13 @@
     
     [self.view bringSubviewToFront:_scrollView];
     _expenseTableView.scrollEnabled = NO;
+    
+    if ([[Util getLocalData] objectForKey:MONTHLY_ALARM_YN]) {
+        useMonthlyAlarm = [[[Util getLocalData] objectForKey:MONTHLY_ALARM_YN] boolValue];
+    } else{
+        [Util setLocalData:@(NO) forKey:MONTHLY_ALARM_YN];
+        useMonthlyAlarm = NO;
+    }
 
     [self refreshExpenseData];
 }
@@ -185,7 +194,7 @@
     [_scrollView setValidRect:CGRectMake(0,TABLE_START_POINT, _expenseTableView.frame.size.width, _expenseTableView.frame.size.height)];
     
     //달이 바뀌었을 경우
-    if ([self didChangeMonth]) {
+    if ([self didChangeMonth] && useMonthlyAlarm) {
 
         UIAlertController *alertMonthChanged = [UIAlertController shortAlert:@"벌써 한 달" withMessage:@"달이 변경되어 새로운 데이터가 로딩됩니다. 목표금액을 변경하시겠습니까?"];
         UIAlertAction *ok = [UIAlertAction actionWithTitle:@"확인"

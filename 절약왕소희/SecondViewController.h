@@ -10,5 +10,6 @@
 
 @interface SecondViewController : UITableViewController
 - (IBAction)onTouchedMonthlyAlertAgree:(id)sender;
+@property (weak, nonatomic) IBOutlet UISwitch *switchMonthlyAlarm;
 
 @end

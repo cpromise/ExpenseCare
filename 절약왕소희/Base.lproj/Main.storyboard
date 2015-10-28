@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -309,6 +310,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="설정" id="cYB-l3-bOs"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="switchMonthlyAlarm" destination="Nzr-Pc-Hb7" id="nNW-3m-gTc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hfw-Hz-uEt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -341,13 +345,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="직접 입력하기" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="blk-mO-7Dx">
-                                <rect key="frame" x="22" y="322" width="330" height="30"/>
+                                <rect key="frame" x="22" y="340.5" width="330" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ve-cs-bBZ">
-                                <rect key="frame" x="107" y="165" width="75" height="66"/>
+                                <rect key="frame" x="107" y="165" width="75" height="75"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="+10만">
@@ -358,12 +362,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVL-5b-b7w">
-                                <rect key="frame" x="192" y="165" width="75" height="66"/>
+                                <rect key="frame" x="192" y="165" width="75" height="75"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="66" id="OiS-VH-E2m"/>
-                                </constraints>
                                 <state key="normal" title="+5만">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -372,7 +373,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1CB-y5-uCW">
-                                <rect key="frame" x="277" y="165" width="75" height="66"/>
+                                <rect key="frame" x="277" y="165" width="75" height="75"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="+1만">
@@ -383,7 +384,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="-20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcH-l0-TNB">
-                                <rect key="frame" x="22" y="241" width="75" height="66"/>
+                                <rect key="frame" x="22" y="250" width="75" height="75.5"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="-20만">
@@ -394,7 +395,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="-10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5N4-EY-Zwi">
-                                <rect key="frame" x="107" y="241" width="75" height="66"/>
+                                <rect key="frame" x="107" y="250" width="75" height="75.5"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="-10만">
@@ -405,7 +406,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="-5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RW-gS-9B1">
-                                <rect key="frame" x="192" y="241" width="75" height="66"/>
+                                <rect key="frame" x="192" y="250" width="75" height="75.5"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="-5만">
@@ -416,7 +417,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ozC-07-6Q0">
-                                <rect key="frame" x="277" y="241" width="75" height="66"/>
+                                <rect key="frame" x="277" y="250" width="75" height="75.5"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="-1만">
@@ -427,7 +428,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhh-tJ-vEq">
-                                <rect key="frame" x="270" y="357" width="82" height="30"/>
+                                <rect key="frame" x="270" y="375.5" width="82" height="30"/>
                                 <animations/>
                                 <state key="normal" title="목표금액 저장"/>
                                 <connections>
@@ -435,7 +436,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2d-er-SvP">
-                                <rect key="frame" x="22" y="165" width="75" height="66"/>
+                                <rect key="frame" x="22" y="165" width="75" height="75"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="+20만">
@@ -457,6 +458,7 @@
                             <constraint firstItem="zhh-tJ-vEq" firstAttribute="top" secondItem="blk-mO-7Dx" secondAttribute="bottom" constant="5" id="G8I-13-fNN"/>
                             <constraint firstItem="5RW-gS-9B1" firstAttribute="height" secondItem="ozC-07-6Q0" secondAttribute="height" id="GUh-dl-lGx"/>
                             <constraint firstItem="ozC-07-6Q0" firstAttribute="height" secondItem="1CB-y5-uCW" secondAttribute="height" id="HJ4-qZ-0lY"/>
+                            <constraint firstItem="mVL-5b-b7w" firstAttribute="height" secondItem="3iY-HL-g4c" secondAttribute="width" multiplier="0.2" id="I2G-t6-Kg8"/>
                             <constraint firstItem="3ve-cs-bBZ" firstAttribute="height" secondItem="mVL-5b-b7w" secondAttribute="height" id="I4J-bH-ORK"/>
                             <constraint firstItem="Lvv-2v-eZM" firstAttribute="top" secondItem="5qo-Sn-qZ5" secondAttribute="bottom" constant="14" id="JnK-lK-DGq"/>
                             <constraint firstItem="3ve-cs-bBZ" firstAttribute="width" secondItem="mVL-5b-b7w" secondAttribute="width" id="KPz-qR-1QI"/>

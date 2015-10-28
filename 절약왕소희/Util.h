@@ -12,6 +12,7 @@
 #define TABLE_START_POINT 250
 #define EXPENSE_HISTORY @"expenseHistory"
 #define GOAL_EXPENSE @"goalExpense"
+#define MONTHLY_ALARM_YN @"MONTHLY_ALARM_YN"
 #define DEFAULT_GOAL_EXPENSE 400000
 
 @interface Util : NSObject

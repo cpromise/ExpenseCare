@@ -23,7 +23,7 @@
     [super viewDidLoad];
     
     goalExpenseVal = [[Util getLocalData] objectForKey:GOAL_EXPENSE];
-    _lbGoalExpense.text = [Util commaFormat:goalExpenseVal.integerValue];
+    _lbGoalExpense.text = [NSString stringWithFormat:@"%@ 원",[Util commaFormat:goalExpenseVal.integerValue]];
     _tfGoalExpense.text = [Util commaFormat:goalExpenseVal.integerValue];
     [_tfGoalExpense addTarget:self action:@selector(didChangedInputExpense:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view.
@@ -38,7 +38,7 @@
 - (IBAction)btnSetGoalExpense:(id)sender {
     NSNumber *goalExpenseToSave = [NSNumber numberWithInteger:[Util removeComma:_tfGoalExpense.text]];
     [Util setLocalData:goalExpenseToSave forKey:GOAL_EXPENSE];
-    _lbGoalExpense.text = [Util commaFormat:goalExpenseToSave.integerValue];
+    _lbGoalExpense.text = [NSString stringWithFormat:@"%@ 원",[Util commaFormat:goalExpenseToSave.integerValue]];
 
     [self.tabBarController.delegate tabBarController:self.tabBarController didSelectViewController:[self.tabBarController.viewControllers objectAtIndex:0]];
 
@@ -71,7 +71,7 @@
         addedVal = 0;
     }
     _tfGoalExpense.text = [Util commaFormat:addedVal];
-    _lbGoalExpense.text = [Util commaFormat:addedVal];
+    _lbGoalExpense.text = [NSString stringWithFormat:@"%@ 원",[Util commaFormat:addedVal]];
 }
 
 #pragma mark - 델리게이트 및 유틸
