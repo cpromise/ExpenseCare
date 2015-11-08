@@ -54,14 +54,10 @@
     [self.view bringSubviewToFront:_scrollView];
     _expenseTableView.scrollEnabled = NO;
     
-    if ([[Util getLocalData] objectForKey:MONTHLY_ALARM_YN]) {
-        useMonthlyAlarm = [[[Util getLocalData] objectForKey:MONTHLY_ALARM_YN] boolValue];
-    } else{
-        [Util setLocalData:@(NO) forKey:MONTHLY_ALARM_YN];
-        useMonthlyAlarm = NO;
-    }
-
+    [self updateMonthlyAlarm];
     [self refreshExpenseData];
+    
+    [self saveLastExpenseData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -193,27 +189,34 @@
     _scrollView.contentSize = CGSizeMake(_expenseTableView.frame.size.width, tableViewHeight + TABLE_START_POINT);
     [_scrollView setValidRect:CGRectMake(0,TABLE_START_POINT, _expenseTableView.frame.size.width, _expenseTableView.frame.size.height)];
     
+    
     //달이 바뀌었을 경우
-    if ([self didChangeMonth] && useMonthlyAlarm) {
-
-        UIAlertController *alertMonthChanged = [UIAlertController shortAlert:@"벌써 한 달" withMessage:@"달이 변경되어 새로운 데이터가 로딩됩니다. 목표금액을 변경하시겠습니까?"];
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"확인"
-                                                     style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction *action){
-                                                       [alertMonthChanged dismissViewControllerAnimated:YES completion:nil];
-                                                       SetGoalExpenseViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"setGoalExpenseViewController"];
-                                                       [self.navigationController pushViewController:controller animated:YES];
-                                                   }];
-        
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"취소"
+    if ([self didChangeMonth]) {
+        [self updateMonthlyAlarm];
+        //MontlyAlarm을 사용할 경우 목표금액 리셋 제안 Alert
+        if (useMonthlyAlarm) {
+            UIAlertController *alertMonthChanged = [UIAlertController shortAlert:@"벌써 한 달"
+                                                                     withMessage:@"달이 변경되어 새로운 데이터가 로딩됩니다. 목표금액을 변경하시겠습니까?"];
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"확인"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *action){
                                                            [alertMonthChanged dismissViewControllerAnimated:YES completion:nil];
+                                                           SetGoalExpenseViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"setGoalExpenseViewController"];
+                                                           [self.navigationController pushViewController:controller animated:YES];
                                                        }];
-        [alertMonthChanged addAction:ok];
-        [alertMonthChanged addAction:cancel];
-        [self presentViewController:alertMonthChanged animated:YES completion:nil];
+            
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"취소"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action){
+                                                               [alertMonthChanged dismissViewControllerAnimated:YES completion:nil];
+                                                           }];
+            [alertMonthChanged addAction:ok];
+            [alertMonthChanged addAction:cancel];
+            [self presentViewController:alertMonthChanged animated:YES completion:nil];
+        }
     }
+    
+    NSLog(@"count of data : %lu",(unsigned long)_expenseList.count);
 }
 
 
@@ -300,6 +303,10 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
 - (BOOL)didChangeMonth{
     BOOL changed = NO;
     
@@ -318,6 +325,35 @@
         }
     }
     return changed;
+}
+
+- (void)updateMonthlyAlarm{
+    if ([[Util getLocalData] objectForKey:MONTHLY_ALARM_YN]) {
+        useMonthlyAlarm = [[[Util getLocalData] objectForKey:MONTHLY_ALARM_YN] boolValue];
+    } else{
+        [Util setLocalData:@(NO) forKey:MONTHLY_ALARM_YN];
+        useMonthlyAlarm = NO;
+    }
+}
+
+//달이 바뀌었는데, 지난 달의 지출정보가 있다면 해당 달에 해당하는 키로 지출정보를 저장한다.
+//EXPENSE_HISTORY파일명에 저장되는 지출정보는 이번 달 내용으로 새롭게 채워나가야 한다.
+//1달에 최대 1번만 실행되어야 하는 메소드
+- (void)saveLastExpenseData{
+    NSInteger prevYear = 0;
+    NSInteger prevMonth = 0;
+    NSString *prevExpense = nil;
+    
+    if (_expenseList && _expenseList.count > 0) {
+        NSString *prevDate = [[_expenseList objectAtIndex:0] objectForKey:@"EXPENSE_DATE"];
+        prevYear = [prevDate substringWithRange:NSMakeRange(0, 2)].integerValue;
+        prevMonth = [prevDate substringWithRange:NSMakeRange(3, 2)].integerValue;
+        prevExpense = [NSString stringWithFormat:EXPENSE_HISTORY_FILENAME_FORMAT,prevYear,prevMonth];
+
+        //위험하니까 일단 블락처리..
+//        [Util setLocalData:_expenseList forKey:prevExpense];
+//        [Util setLocalData:nil forKey:EXPENSE_HISTORY];
+    }
 }
 
 @end
